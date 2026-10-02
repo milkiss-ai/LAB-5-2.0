@@ -5,7 +5,8 @@ import { ProductCard } from './ProductCard';
 
 export function ProductList() {
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] =
+        useState([]);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -16,7 +17,6 @@ export function ProductList() {
         maxPrice: 9999,
     });
 
-    // Загрузка товаров
     useEffect(() => {
         const controller = new AbortController();
 
@@ -55,33 +55,33 @@ export function ProductList() {
         return () => controller.abort();
     }, []);
 
-    // Фильтрация
     useEffect(() => {
         let result = products;
 
-        // Фильтр по нескольким категориям
         if (
             filters.categories &&
             filters.categories.length > 0
         ) {
             result = result.filter((product) =>
-                filters.categories.includes(product.category)
+                filters.categories.includes(
+                    product.category
+                )
             );
         }
 
-        // Минимальная цена
         if (filters.minPrice !== undefined) {
             result = result.filter(
                 (product) =>
-                    product.price >= filters.minPrice
+                    product.price >=
+                    filters.minPrice
             );
         }
 
-        // Максимальная цена
         if (filters.maxPrice !== undefined) {
             result = result.filter(
                 (product) =>
-                    product.price <= filters.maxPrice
+                    product.price <=
+                    filters.maxPrice
             );
         }
 
@@ -90,59 +90,135 @@ export function ProductList() {
 
     if (loading) {
         return (
-            <p style={{ textAlign: 'center' }}>
+            <div
+                style={{
+                    textAlign: 'center',
+                    padding: '60px',
+                    color: '#6b7280',
+                    fontSize: '18px',
+                }}
+            >
                 Загрузка товаров...
-            </p>
+            </div>
         );
     }
 
     if (error) {
         return (
-            <p
+            <div
                 style={{
-                    color: 'red',
                     textAlign: 'center',
+                    padding: '40px',
+                    color: '#dc2626',
                 }}
             >
                 Ошибка: {error}
-            </p>
+            </div>
         );
     }
 
     return (
         <section>
-            <Filters
-                onFilterChange={setFilters}
-                initialFilters={filters}
-            />
+  
+            <div
+                style={{
+                    backgroundColor: '#ffffff',
+                    borderRadius: '16px',
+                    padding: '28px 32px',
+                    boxShadow:
+                        '0 4px 20px rgba(0, 0, 0, 0.07)',
+                    border: '1px solid #e5e7eb',
+                    boxSizing: 'border-box',
+                    marginBottom: '36px',
+                }}
+            >
+                <h2
+                    style={{
+                        margin: '0 0 24px',
+                        textAlign: 'center',
+                        fontSize: '22px',
+                        color: '#1f2937',
+                    }}
+                >
+                    Фильтры
+                </h2>
+
+                <Filters
+                    onFilterChange={setFilters}
+                    initialFilters={filters}
+                />
+            </div>
+
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '20px',
+                    padding: '0 4px',
+                }}
+            >
+                <h2
+                    style={{
+                        margin: 0,
+                        fontSize: '24px',
+                        color: '#1f2937',
+                    }}
+                >
+                    Товары
+                </h2>
+
+                <span
+                    style={{
+                        color: '#6b7280',
+                        fontSize: '15px',
+                    }}
+                >
+                    Найдено товаров:{' '}
+                    <strong
+                        style={{
+                            color: '#2563eb',
+                        }}
+                    >
+                        {filteredProducts.length}
+                    </strong>
+                </span>
+            </div>
 
             {filteredProducts.length === 0 ? (
-                <p
+                <div
                     style={{
+                        backgroundColor: '#fff',
+                        borderRadius: '12px',
+                        padding: '40px',
                         textAlign: 'center',
-                        color: '#777',
+                        color: '#6b7280',
+                        border:
+                            '1px solid #e5e7eb',
                     }}
                 >
                     Товары не найдены по выбранным
                     фильтрам.
-                </p>
+                </div>
             ) : (
                 <div
                     style={{
                         display: 'grid',
                         gridTemplateColumns:
-                            'repeat(auto-fill, minmax(250px, 1fr))',
-                        gap: '1.5rem',
+                            'repeat(auto-fill, minmax(240px, 1fr))',
+                        gap: '20px',
                         width: '100%',
                         boxSizing: 'border-box',
                     }}
                 >
-                    {filteredProducts.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product}
-                        />
-                    ))}
+                    {filteredProducts.map(
+                        (product) => (
+                            <ProductCard
+                                key={product.id}
+                                product={product}
+                            />
+                        )
+                    )}
                 </div>
             )}
         </section>

@@ -4,53 +4,83 @@ export function ProductCard({ product }) {
     return (
         <article
             style={{
-                border: '1px solid #e0e0e0',
-                padding: '1rem',
-                borderRadius: '8px',
+                backgroundColor: '#ffffff',
+                borderRadius: '14px',
+                padding: '18px',
+                border: '1px solid #e5e7eb',
                 boxShadow:
-                    '0 2px 4px rgba(0,0,0,0.05)',
+                    '0 3px 12px rgba(0, 0, 0, 0.06)',
                 boxSizing: 'border-box',
-                textAlign: 'center',
                 minWidth: 0,
+                transition:
+                    'transform 0.2s ease',
             }}
         >
+            {/* Фотография */}
             <div
                 style={{
-                    height: '120px',
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'%3E%3Crect fill='%23eee' width='200' height='120'/%3E%3Ctext fill='%23999' x='50%' y='55%' text-anchor='middle' font-size='16' font-family='sans-serif'%3E${product.category}%3C/text%3E%3C/svg%3E")`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    marginBottom: '1rem',
-                    borderRadius: '4px',
+                    width: '100%',
+                    height: '210px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#f9fafb',
+                    borderRadius: '10px',
+                    marginBottom: '16px',
+                    overflow: 'hidden',
                 }}
-            />
+            >
+                <img
+                    src={product.image}
+                    alt={product.title}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '12px',
+                        boxSizing:
+                            'border-box',
+                    }}
+                />
+            </div>
 
+            {/* Название */}
             <h3
                 style={{
-                    margin: 0,
-                    fontSize: '1.1rem',
+                    margin: '0 0 10px',
+                    fontSize: '16px',
+                    lineHeight: '1.4',
+                    color: '#1f2937',
+                    minHeight: '45px',
                 }}
             >
                 {product.title}
             </h3>
 
+            {/* Категория */}
             <p
                 style={{
-                    margin: '8px 0',
-                    color: '#555',
+                    margin: '0 0 12px',
+                    color: '#6b7280',
+                    fontSize: '13px',
                 }}
             >
-                Категория: {product.category}
+                {product.category}
             </p>
 
+            {/* Цена */}
             <p
                 style={{
                     margin: 0,
-                    fontWeight: 'bold',
-                    fontSize: '1.2rem',
+                    fontSize: '20px',
+                    fontWeight: '700',
+                    color: '#2563eb',
                 }}
             >
-                {product.price.toLocaleString('ru-RU')} ₽
+                {product.price.toLocaleString(
+                    'ru-RU'
+                )}{' '}
+                ₽
             </p>
         </article>
     );

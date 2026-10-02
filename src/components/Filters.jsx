@@ -1,19 +1,26 @@
 import React from 'react';
 
-export function Filters({ onFilterChange, initialFilters }) {
-    const [localCategories, setLocalCategories] = React.useState(
-        initialFilters.categories || []
-    );
+export function Filters({
+    onFilterChange,
+    initialFilters,
+}) {
+    const [localCategories, setLocalCategories] =
+        React.useState(
+            initialFilters.categories || []
+        );
 
-    const [localMinPrice, setLocalMinPrice] = React.useState(
-        initialFilters.minPrice ?? 0
-    );
+    const [localMinPrice, setLocalMinPrice] =
+        React.useState(
+            initialFilters.minPrice ?? 0
+        );
 
-    const [localMaxPrice, setLocalMaxPrice] = React.useState(
-        initialFilters.maxPrice ?? 9999
-    );
+    const [localMaxPrice, setLocalMaxPrice] =
+        React.useState(
+            initialFilters.maxPrice ?? 9999
+        );
 
-    const [errors, setErrors] = React.useState({});
+    const [errors, setErrors] =
+        React.useState({});
 
     const validate = () => {
         const errs = {};
@@ -22,19 +29,21 @@ export function Filters({ onFilterChange, initialFilters }) {
         const max = Number(localMaxPrice);
 
         if (min < 0) {
-            errs.min = 'Цена не может быть отрицательной';
+            errs.min =
+                'Цена не может быть отрицательной';
         }
 
         if (max < 0) {
-            errs.max = 'Цена не может быть отрицательной';
+            errs.max =
+                'Цена не может быть отрицательной';
         }
 
         if (min > max) {
             errs.min =
-                'Цена «от» не может быть больше цены «до»';
+                'Цена «от» больше цены «до»';
 
             errs.max =
-                'Цена «до» не может быть меньше цены «от»';
+                'Цена «до» меньше цены «от»';
         }
 
         return errs;
@@ -61,13 +70,18 @@ export function Filters({ onFilterChange, initialFilters }) {
         });
     };
 
-    const handleCategoryChange = (category, checked) => {
+    const handleCategoryChange = (
+        category,
+        checked
+    ) => {
         setLocalCategories((prev) => {
             if (checked) {
                 return [...prev, category];
             }
 
-            return prev.filter((item) => item !== category);
+            return prev.filter(
+                (item) => item !== category
+            );
         });
     };
 
@@ -97,7 +111,6 @@ export function Filters({ onFilterChange, initialFilters }) {
         <div
             style={{
                 width: '100%',
-                marginBottom: '2rem',
                 boxSizing: 'border-box',
             }}
         >
@@ -106,12 +119,12 @@ export function Filters({ onFilterChange, initialFilters }) {
                     display: 'grid',
                     gridTemplateColumns:
                         'repeat(3, minmax(0, 1fr))',
-                    gap: '2rem',
+                    gap: '28px',
                     width: '100%',
-                    marginBottom: '2rem',
                     boxSizing: 'border-box',
                 }}
             >
+
                 <div
                     style={{
                         minWidth: 0,
@@ -120,8 +133,10 @@ export function Filters({ onFilterChange, initialFilters }) {
                     <label
                         style={{
                             display: 'block',
-                            textAlign: 'center',
-                            marginBottom: '8px',
+                            fontWeight: '600',
+                            color: '#374151',
+                            marginBottom: '10px',
+                            fontSize: '15px',
                         }}
                     >
                         Категория
@@ -130,20 +145,23 @@ export function Filters({ onFilterChange, initialFilters }) {
                     <div
                         style={{
                             width: '100%',
-                            height: '85px',
-                            overflowY: 'auto',
-                            boxSizing: 'border-box',
-                            padding: '8px 12px',
-                            border: '1px solid #ccc',
-                            borderRadius: '4px',
-                            backgroundColor: '#fff',
+                            boxSizing:
+                                'border-box',
+                            padding: '10px 12px',
+                            border:
+                                '1px solid #d1d5db',
+                            borderRadius: '10px',
+                            backgroundColor:
+                                '#f9fafb',
                         }}
                     >
                         <label
                             style={{
                                 display: 'block',
-                                marginBottom: '7px',
+                                marginBottom:
+                                    '9px',
                                 cursor: 'pointer',
+                                color: '#374151',
                             }}
                         >
                             <input
@@ -154,22 +172,26 @@ export function Filters({ onFilterChange, initialFilters }) {
                                 onChange={(e) =>
                                     handleCategoryChange(
                                         'electronics',
-                                        e.target.checked
+                                        e.target
+                                            .checked
                                     )
                                 }
                                 style={{
-                                    marginRight: '8px',
+                                    marginRight:
+                                        '9px',
+                                    cursor: 'pointer',
                                 }}
                             />
-
                             Электроника
                         </label>
 
                         <label
                             style={{
                                 display: 'block',
-                                marginBottom: '7px',
+                                marginBottom:
+                                    '9px',
                                 cursor: 'pointer',
+                                color: '#374151',
                             }}
                         >
                             <input
@@ -180,22 +202,26 @@ export function Filters({ onFilterChange, initialFilters }) {
                                 onChange={(e) =>
                                     handleCategoryChange(
                                         'jewelery',
-                                        e.target.checked
+                                        e.target
+                                            .checked
                                     )
                                 }
                                 style={{
-                                    marginRight: '8px',
+                                    marginRight:
+                                        '9px',
+                                    cursor: 'pointer',
                                 }}
                             />
-
                             Ювелирные изделия
                         </label>
 
                         <label
                             style={{
                                 display: 'block',
-                                marginBottom: '7px',
+                                marginBottom:
+                                    '9px',
                                 cursor: 'pointer',
+                                color: '#374151',
                             }}
                         >
                             <input
@@ -206,14 +232,16 @@ export function Filters({ onFilterChange, initialFilters }) {
                                 onChange={(e) =>
                                     handleCategoryChange(
                                         "men's clothing",
-                                        e.target.checked
+                                        e.target
+                                            .checked
                                     )
                                 }
                                 style={{
-                                    marginRight: '8px',
+                                    marginRight:
+                                        '9px',
+                                    cursor: 'pointer',
                                 }}
                             />
-
                             Мужская одежда
                         </label>
 
@@ -221,6 +249,7 @@ export function Filters({ onFilterChange, initialFilters }) {
                             style={{
                                 display: 'block',
                                 cursor: 'pointer',
+                                color: '#374151',
                             }}
                         >
                             <input
@@ -231,14 +260,16 @@ export function Filters({ onFilterChange, initialFilters }) {
                                 onChange={(e) =>
                                     handleCategoryChange(
                                         "women's clothing",
-                                        e.target.checked
+                                        e.target
+                                            .checked
                                     )
                                 }
                                 style={{
-                                    marginRight: '8px',
+                                    marginRight:
+                                        '9px',
+                                    cursor: 'pointer',
                                 }}
                             />
-
                             Женская одежда
                         </label>
                     </div>
@@ -252,8 +283,10 @@ export function Filters({ onFilterChange, initialFilters }) {
                     <label
                         style={{
                             display: 'block',
-                            textAlign: 'center',
-                            marginBottom: '8px',
+                            fontWeight: '600',
+                            color: '#374151',
+                            marginBottom: '10px',
+                            fontSize: '15px',
                         }}
                     >
                         Цена от
@@ -268,12 +301,18 @@ export function Filters({ onFilterChange, initialFilters }) {
                         style={{
                             display: 'block',
                             width: '100%',
-                            boxSizing: 'border-box',
-                            padding: '8px 12px',
+                            boxSizing:
+                                'border-box',
+                            padding:
+                                '10px 12px',
                             border: errors.min
-                                ? '1px solid red'
-                                : '1px solid #ccc',
-                            borderRadius: '4px',
+                                ? '1px solid #ef4444'
+                                : '1px solid #d1d5db',
+                            borderRadius: '10px',
+                            outline: 'none',
+                            fontSize: '15px',
+                            backgroundColor:
+                                '#f9fafb',
                         }}
                     />
 
@@ -287,8 +326,8 @@ export function Filters({ onFilterChange, initialFilters }) {
                         style={{
                             display: 'block',
                             width: '100%',
-                            marginTop: '10px',
-                            boxSizing: 'border-box',
+                            marginTop: '16px',
+                            cursor: 'pointer',
                         }}
                     />
 
@@ -296,9 +335,10 @@ export function Filters({ onFilterChange, initialFilters }) {
                         <span
                             style={{
                                 display: 'block',
-                                color: 'red',
-                                fontSize: '0.85rem',
-                                marginTop: '4px',
+                                color: '#dc2626',
+                                fontSize:
+                                    '13px',
+                                marginTop: '6px',
                             }}
                         >
                             {errors.min}
@@ -314,8 +354,10 @@ export function Filters({ onFilterChange, initialFilters }) {
                     <label
                         style={{
                             display: 'block',
-                            textAlign: 'center',
-                            marginBottom: '8px',
+                            fontWeight: '600',
+                            color: '#374151',
+                            marginBottom: '10px',
+                            fontSize: '15px',
                         }}
                     >
                         Цена до
@@ -330,12 +372,18 @@ export function Filters({ onFilterChange, initialFilters }) {
                         style={{
                             display: 'block',
                             width: '100%',
-                            boxSizing: 'border-box',
-                            padding: '8px 12px',
+                            boxSizing:
+                                'border-box',
+                            padding:
+                                '10px 12px',
                             border: errors.max
-                                ? '1px solid red'
-                                : '1px solid #ccc',
-                            borderRadius: '4px',
+                                ? '1px solid #ef4444'
+                                : '1px solid #d1d5db',
+                            borderRadius: '10px',
+                            outline: 'none',
+                            fontSize: '15px',
+                            backgroundColor:
+                                '#f9fafb',
                         }}
                     />
 
@@ -349,8 +397,8 @@ export function Filters({ onFilterChange, initialFilters }) {
                         style={{
                             display: 'block',
                             width: '100%',
-                            marginTop: '10px',
-                            boxSizing: 'border-box',
+                            marginTop: '16px',
+                            cursor: 'pointer',
                         }}
                     />
 
@@ -358,9 +406,10 @@ export function Filters({ onFilterChange, initialFilters }) {
                         <span
                             style={{
                                 display: 'block',
-                                color: 'red',
-                                fontSize: '0.85rem',
-                                marginTop: '4px',
+                                color: '#dc2626',
+                                fontSize:
+                                    '13px',
+                                marginTop: '6px',
                             }}
                         >
                             {errors.max}
@@ -369,22 +418,33 @@ export function Filters({ onFilterChange, initialFilters }) {
                 </div>
             </div>
 
-            <button
-                onClick={handleApply}
+            <div
                 style={{
-                    display: 'block',
-                    margin: '0 auto',
-                    padding: '10px 24px',
-                    background: '#2563eb',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontSize: '1rem',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '28px',
                 }}
             >
-                Применить фильтры
-            </button>
+                <button
+                    onClick={handleApply}
+                    style={{
+                        padding:
+                            '11px 28px',
+                        backgroundColor:
+                            '#2563eb',
+                        color: '#ffffff',
+                        border: 'none',
+                        borderRadius: '10px',
+                        cursor: 'pointer',
+                        fontSize: '15px',
+                        fontWeight: '600',
+                        boxShadow:
+                            '0 3px 8px rgba(37, 99, 235, 0.25)',
+                    }}
+                >
+                    Применить фильтры
+                </button>
+            </div>
         </div>
     );
 }
